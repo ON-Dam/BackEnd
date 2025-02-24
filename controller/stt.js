@@ -10,12 +10,12 @@ async function stt(bucketName, audioFilePath, outputFilePath) {
         const audio = {uri: audioUri};
         const config = {
             encoding: 'LINEAR16',  // 인코딩
-            sampleRateHertz: 16000,  // 샘플링 레이트
+            sampleRateHertz: 44100,  // 샘플링 레이트
             languageCode: 'ko-KR',
             enableWordTimeOffsets: true,  // 단어별 타임스탬프
             enableAutomaticPunctuation: true,  // 문장 부호
             useEnhanced: true,  // 향상된 모델
-            model: 'latest_long',  // 긴 문장에 최적화된 모델
+            model: 'latest_long', // 긴 문장에 최적화된 모델
         };
 
         console.log(`Transcribing file`);
