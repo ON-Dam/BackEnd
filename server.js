@@ -1,10 +1,11 @@
 require('dotenv').config();
 
-const {translateTextFromFile}=require('./file_test');
+const {translateTextFromFile} = require('./file_test');
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const {stt} = require("./controller/stt");
 
 const app = express();
 const PORT = 8080;
@@ -20,7 +21,7 @@ const storage = multer.diskStorage({
         cb(null, Date.now() + path.extname(file.originalname)); // 파일명 변경
     }
 });
-const upload = multer({ storage });
+const upload = multer({storage});
 
 app.get('/', (req, res) => {
     res.render('index');
@@ -42,9 +43,9 @@ app.post('/upload', upload.single('uploadedFile'), async (req, res) => {
         `);
 
 });
-app.get(`/download/:filename`, (req, res)=>{
-const filePath = path.join(__dirname, 'uploads', req.params.filename);
-    
+app.get(`/download/:filename`, (req, res) => {
+    const filePath = path.join(__dirname, 'uploads', req.params.filename);
+
     if (!fs.existsSync(filePath)) {
         return res.status(404).send('파일을 찾을 수 없습니다.');
     }
@@ -57,6 +58,16 @@ const filePath = path.join(__dirname, 'uploads', req.params.filename);
     });
 
 })
+
+app.get('/stt', async (req, res) => {
+    try {
+        const transcription = await stt('ondam_storage', 'test/output.wav', 'test/trans.json');
+        res.json({success: true, message: 'Transcription completed', transcription});
+    } catch (error) {
+        res.status(500).json({success: false, error: error.message});
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`🚀 서버 실행 중: http://localhost:${PORT}`);
 });
