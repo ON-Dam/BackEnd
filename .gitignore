@@ -1,3 +1,10 @@
+.env
+credentials.json
 node_modules
-.idea
+README.md
+input.txt
+.gitignore
 app.yaml
+package-lock.json
+package.json
+.idea
