@@ -13,5 +13,9 @@
 .git
 .gitignore
 
+
+cloudrun
+
+
 # Node.js dependencies:
 node_modules/
