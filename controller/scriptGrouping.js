@@ -2943,6 +2943,17 @@ function gettimestamp(script) {
     return timestamp;
 }
 
-script.forEach((script) => {
-    console.log(gettimestamp(script));
-})
+
+//최종 export 함수
+//기존 jsno파일을 입력 -> timestamp와 문장을 반환
+//[[{sentence:문장(str), start: 시작시간(num), end: 종료시간(num)}], ...]
+function scriptGrouping(scripts) {
+    let scriptTimestamp = [];
+    scripts.forEach((script) => {
+        scriptTimestamp.push(gettimestamp(script));
+    })
+    return scriptTimestamp;
+}
+
+exports.scriptGrouping = scriptGrouping;
+
