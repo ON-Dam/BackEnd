@@ -6,26 +6,34 @@ const multer = require("multer");
 const {stt} = require("../controller/stt");
 const {bucketUpload} = require("../controller/bucketUpload");
 const {convertWav} = require("../controller/convertWav");
+const {scriptGrouping} = require("../controller/scriptGrouping");
 
 
 const router = express.Router();
 const bucketname = 'ondam_storage';
 
+
+//영상 처리용 임시 페이지
 router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'views', 'stt.html'));
 });
+
+
 // 버킷 파일 업로드
-const upload = multer({storage: multer.memoryStorage()});// Multer 설정 (메모리 저장)
+const upload = multer({storage: multer.memoryStorage()});// 메모리 저장
 router.post('/videoconvert', upload.single('video'), async (req, res) => {
     //영상 업로드
+    console.log('처리시작');
     if (!req.file) {
         return res.status(400).json({message: "파일이 없습니다."});
     }
-    const UUID = uuidv1();//임시 변환 아이디
-    const ext = path.extname(req.file.originalname);//확장자
-    const videoPath = `test/${UUID}/originalVideo${ext}`;
-    const audioPath = `test/${UUID}/audio.wav`;
-    const ScriptPath = `test/${UUID}/script.json`;
+    const UUID = uuidv1();//각 변환에 부여되는 Id
+    const ext = path.extname(req.file.originalname);//영상 확장자
+    const videoPath = `test/${UUID}/originalVideo${ext}`; //영상 저장 위치
+    const audioPath = `test/${UUID}/audio.wav`; // 음성파일 저장 위치
+    const ScriptPath = `test/${UUID}/script.json`; // 스크립트 저장 위치
+    const timestampPath = `test/${UUID}/timestamp.json`;
+    // 영상 업로드
     try {
         await bucketUpload(bucketname, videoPath, req.file.buffer);
         console.log('업로드 성공')
@@ -34,26 +42,31 @@ router.post('/videoconvert', upload.single('video'), async (req, res) => {
         res.status(500).json({message: "업로드 실패", error: error.message});
     }
 
-    //convert wav
-    await convertWav(bucketname, videoPath, audioPath);
-
+    //wav 음성파일 생성
+    try {
+        await convertWav(bucketname, videoPath, audioPath);
+        console.log('변환 성공')
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({message: "변환 실패", error: error.message});
+    }
+    let transcription;
     //STT
     try {
-        const transcription = await stt(bucketname, audioPath, ScriptPath);
-
+        transcription = await stt(bucketname, audioPath, ScriptPath);
+        console.log('변환 성공')
     } catch (error) {
         res.status(500).json({success: false, error: error.message});
     }
 
-});
-
-router.get('/stttest', async (req, res) => {
+    //timestamp
     try {
-        const transcription = await stt('ondam_storage', 'test/output.wav', 'test/trans.json');
-        res.json({success: true, message: 'Transcription completed', transcription});
+        let timestampJson = JSON.stringify(scriptGrouping(transcription), null, 2);
+        await bucketUpload(bucketname, timestampPath, timestampJson);
     } catch (error) {
         res.status(500).json({success: false, error: error.message});
     }
+    console.log('stt완료');
 });
 
 

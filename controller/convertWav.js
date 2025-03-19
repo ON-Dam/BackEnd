@@ -11,6 +11,7 @@ async function convertWav(bucketName, videoFilename, audioFilename) {
             wav_filename: audioFilename
         });
 
+        //post로 변환 요청
         const response = await axios.post(fastApiUrl, {
             bucket_name: bucketName,
             video_filename: videoFilename,

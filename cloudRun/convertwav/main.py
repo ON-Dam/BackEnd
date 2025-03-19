@@ -7,25 +7,24 @@ from google.cloud import storage
 import ffmpeg
 import os
 
-PORT = int(os.environ.get("PORT", 8080))  # 기본값 8080
+PORT = int(os.environ.get("PORT", 8080))
 CMD = ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", str(PORT)]
 app = FastAPI()
 
 # 로그 설정
 logging.basicConfig(level=logging.INFO)
 
-# 비동기 함수로 변환 작업 처리
+# wav파일로 변환
 async def convert_video_to_wav(input_video_path, output_wav_path):
     try:
         loop = asyncio.get_event_loop()
-        # ac=1 옵션을 추가하여 모노 채널로 변환
         await loop.run_in_executor(None, lambda: ffmpeg.input(input_video_path).output(output_wav_path, ac=1).run())
         logging.info(f"Converted video {input_video_path} to {output_wav_path}")
     except Exception as e:
         logging.error(f"FFmpeg conversion failed for {input_video_path}: {str(e)}", exc_info=True)
         raise Exception(f"FFmpeg conversion failed: {str(e)}")
 
-# 비동기 함수로 동영상 다운로드
+# 동영상 다운로드
 async def download_video_from_bucket(bucket_name, video_filename, local_video_filename):
     try:
         client = storage.Client()
@@ -37,7 +36,7 @@ async def download_video_from_bucket(bucket_name, video_filename, local_video_fi
         logging.error(f"Failed to download {video_filename} from {bucket_name}: {str(e)}", exc_info=True)
         raise Exception(f"Failed to download {video_filename}: {str(e)}")
 
-# 비동기 함수로 WAV 파일 업로드
+# WAV 파일 업로드
 async def upload_wav_to_bucket(bucket_name, wav_filename, destination_filename):
     try:
         client = storage.Client()
@@ -49,7 +48,7 @@ async def upload_wav_to_bucket(bucket_name, wav_filename, destination_filename):
         logging.error(f"Failed to upload {destination_filename} to {bucket_name}: {str(e)}", exc_info=True)
         raise Exception(f"Failed to upload {destination_filename}: {str(e)}")
 
-# 멀티 요청을 비동기적으로 처리하는 함수
+# 요청 처리
 async def process_video(bucket_name, video_filename, wav_filename):
     local_video_path = f"/tmp/{video_filename.split('/')[-1]}"
     local_wav_path = f"/tmp/{wav_filename.split('/')[-1]}"
@@ -85,7 +84,7 @@ class VideoRequest(BaseModel):
 async def convert_videos(request: VideoRequest):
     # 비동기 작업 처리
     try:
-        # request에서 전달된 wav_filename을 그대로 사용
+
         result = await process_video(request.bucket_name, request.video_filename, request.wav_filename)
         return {"result": result}
     except Exception as e:
