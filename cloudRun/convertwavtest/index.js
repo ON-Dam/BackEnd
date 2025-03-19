@@ -67,7 +67,7 @@ exports.processVideo = async (cloudevent) => {
 
 async function convertVideoToWav(inputPath, outputPath) {
     return new Promise((resolve, reject) => {
-        const command = `ffmpeg -i ${inputPath} -ac 2 -ar 44100 -vn ${outputPath}`;
+        const command = `ffmpeg -i ${inputPath} -ac 1 -ar 44100 -vn ${outputPath}`;
         console.log(`▶️ FFmpeg 실행: ${command}`);
 
         exec(command, (error, stdout, stderr) => {
