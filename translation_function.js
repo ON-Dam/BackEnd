@@ -1,6 +1,7 @@
 const { Storage } = require('@google-cloud/storage');
 const { TranslationServiceClient } = require('@google-cloud/translate');
 const functions = require('@google-cloud/functions-framework');
+require('dotenv').config();
 
 // 클라이언트 초기화
 const storage = new Storage();
@@ -19,7 +20,6 @@ functions.cloudEvent('requestHandler', async (cloudevent) => {
   try {
     const [contents] = await file.download();
     const text = contents.toString('utf8');
-    console.log(`읽은 내용: ${text}`);
 
     const request = {
       parent: `projects/${process.env.PROJECT_ID}/locations/global`,
@@ -28,15 +28,11 @@ functions.cloudEvent('requestHandler', async (cloudevent) => {
       sourceLanguageCode: 'en',
       targetLanguageCode: 'ko',
     };
-
     const [response] = await translationClient.translateText(request);
-
     let translatedText = '';
     for (const translation of response.translations) {
       translatedText += `${translation.translatedText}\n`;
     }
-
-    console.log(`📝 번역 결과: ${translatedText}`);
 
     const dt = new Date();
     const targetBucketName = 'ondam_storage';
