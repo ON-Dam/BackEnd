@@ -2898,7 +2898,7 @@ script = [
 
 
 //문장 분리
-function sentenceGrouping(inputtext) {
+function korSentenceGrouping(inputtext) {
 
     //문장부호를 기준으로 문장 분리
     let sentences = inputtext.split(/([.?!,])/).filter(Boolean);
@@ -2913,8 +2913,8 @@ function sentenceGrouping(inputtext) {
 }
 
 //타임 스탬프 추출
-function gettimestamp(script) {
-    let groupedSentences = sentenceGrouping(script.text);
+function korGettimestamp(script) {
+    let groupedSentences = korSentenceGrouping(script.text);
     let timestamp = [];
 
     let wordindex = 0;
@@ -2947,13 +2947,12 @@ function gettimestamp(script) {
 //최종 export 함수
 //기존 jsno파일을 입력 -> timestamp와 문장을 반환
 //[[{sentence:문장(str), start: 시작시간(num), end: 종료시간(num)}], ...]
-function scriptGrouping(scripts) {
+function korScriptGrouping(scripts) {
     let scriptTimestamp = [];
     scripts.forEach((script) => {
-        scriptTimestamp.push(gettimestamp(script));
+        scriptTimestamp.push(korGettimestamp(script));
     })
     return scriptTimestamp;
 }
 
-exports.scriptGrouping = scriptGrouping;
-
+exports.korScriptGrouping = korScriptGrouping;

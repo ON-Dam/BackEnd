@@ -6,7 +6,7 @@ const multer = require("multer");
 const {stt} = require("../controller/stt");
 const {bucketUpload} = require("../controller/bucketUpload");
 const {convertWav} = require("../controller/convertWav");
-const {scriptGrouping} = require("../controller/scriptGrouping");
+const {korScriptGrouping} = require("../controller/scriptGrouping");
 
 
 const router = express.Router();
@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
 
 // 버킷 파일 업로드
 const upload = multer({storage: multer.memoryStorage()});// 메모리 저장
-router.post('/videoconvert', upload.single('video'), async (req, res) => {
+router.post('/korvideoconvert', upload.single('video'), async (req, res) => {
     //영상 업로드
     console.log('처리시작');
     if (!req.file) {
@@ -53,7 +53,55 @@ router.post('/videoconvert', upload.single('video'), async (req, res) => {
     let transcription;
     //STT
     try {
-        transcription = await stt(bucketname, audioPath, ScriptPath);
+        transcription = await stt(bucketname, audioPath, ScriptPath, 'ko-KR');
+        console.log('변환 성공')
+    } catch (error) {
+        res.status(500).json({success: false, error: error.message});
+    }
+
+    //timestamp
+    try {
+        let timestampJson = JSON.stringify(korScriptGrouping(transcription), null, 2);
+        await bucketUpload(bucketname, timestampPath, timestampJson);
+    } catch (error) {
+        res.status(500).json({success: false, error: error.message});
+    }
+    console.log('stt완료');
+});
+
+router.post('/engconvert', upload.single('video'), async (req, res) => {
+    //영상 업로드
+    console.log('처리시작');
+    if (!req.file) {
+        return res.status(400).json({message: "파일이 없습니다."});
+    }
+    const UUID = uuidv1();//각 변환에 부여되는 Id
+    const ext = path.extname(req.file.originalname);//영상 확장자
+    const videoPath = `test/${UUID}/originalVideo${ext}`; //영상 저장 위치
+    const audioPath = `test/${UUID}/audio.wav`; // 음성파일 저장 위치
+    const ScriptPath = `test/${UUID}/script.json`; // 스크립트 저장 위치
+    const timestampPath = `test/${UUID}/timestamp.json`;
+    // 영상 업로드
+    try {
+        await bucketUpload(bucketname, videoPath, req.file.buffer);
+        console.log('업로드 성공')
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({message: "업로드 실패", error: error.message});
+    }
+
+    //wav 음성파일 생성
+    try {
+        await convertWav(bucketname, videoPath, audioPath);
+        console.log('변환 성공')
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({message: "변환 실패", error: error.message});
+    }
+    let transcription;
+    //STT
+    try {
+        transcription = await stt(bucketname, audioPath, ScriptPath, 'en-US');
         console.log('변환 성공')
     } catch (error) {
         res.status(500).json({success: false, error: error.message});
@@ -68,6 +116,5 @@ router.post('/videoconvert', upload.single('video'), async (req, res) => {
     }
     console.log('stt완료');
 });
-
 
 module.exports = router;
