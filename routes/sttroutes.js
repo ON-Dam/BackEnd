@@ -6,7 +6,7 @@ const multer = require("multer");
 const {stt} = require("../controller/stt");
 const {bucketUpload} = require("../controller/bucketUpload");
 const {convertWav} = require("../controller/convertWav");
-const {korScriptGrouping} = require("../controller/scriptGrouping");
+const {korScriptGrouping, engScriptGrouping} = require("../controller/scriptGrouping");
 
 
 const router = express.Router();
@@ -109,7 +109,7 @@ router.post('/engconvert', upload.single('video'), async (req, res) => {
 
     //timestamp
     try {
-        let timestampJson = JSON.stringify(scriptGrouping(transcription), null, 2);
+        let timestampJson = JSON.stringify(engScriptGrouping(transcription), null, 2);
         await bucketUpload(bucketname, timestampPath, timestampJson);
     } catch (error) {
         res.status(500).json({success: false, error: error.message});

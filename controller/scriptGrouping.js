@@ -1,3 +1,4 @@
+const {stringify} = require("uuid");
 script = [
     {
         "text": "딥시크에 등장으로 자극을 받은 우리 아이티 업계의 움직임이 빨라지고 있습니다. 은둔의 경영자로 불리는 이혜진 전 네이버 의장이 복귀에 나섰고, 국가대표 추격조를 만들자 독자적인 기술을 개발하자는 제안들이 쏟아지고 있습니다. 김윤미 기자의 보도입니다.",
@@ -2956,3 +2957,1234 @@ function korScriptGrouping(scripts) {
 }
 
 exports.korScriptGrouping = korScriptGrouping;
+
+engscript = [
+    {
+        "text": "Now, at least 34 people have been killed as tornadoes and extreme weather sweep. The Central and Southern United States. The state of Missouri is recorded more fatalities than any other state with extreme weather killing 12, people high winds knocked out, power to more than 250,000 homes and businesses in Texas Arkansas, Missouri, Michigan, Illinois, Indiana and Mississippi, Laura Trent reports.",
+        "words": [
+            {
+                "word": "Now,",
+                "startTime": 0.5,
+                "endTime": 0.8
+            },
+            {
+                "word": "at",
+                "startTime": 0.8,
+                "endTime": 1
+            },
+            {
+                "word": "least",
+                "startTime": 1,
+                "endTime": 1
+            },
+            {
+                "word": "34",
+                "startTime": 1,
+                "endTime": 1.7000000000000002
+            },
+            {
+                "word": "people",
+                "startTime": 1.7000000000000002,
+                "endTime": 1.8
+            },
+            {
+                "word": "have",
+                "startTime": 1.8,
+                "endTime": 2
+            },
+            {
+                "word": "been",
+                "startTime": 2,
+                "endTime": 2.2
+            },
+            {
+                "word": "killed",
+                "startTime": 2.2,
+                "endTime": 2.4
+            },
+            {
+                "word": "as",
+                "startTime": 2.4,
+                "endTime": 2.9
+            },
+            {
+                "word": "tornadoes",
+                "startTime": 2.9,
+                "endTime": 3.4
+            },
+            {
+                "word": "and",
+                "startTime": 3.4,
+                "endTime": 3.5
+            },
+            {
+                "word": "extreme",
+                "startTime": 3.5,
+                "endTime": 4.3
+            },
+            {
+                "word": "weather",
+                "startTime": 4.3,
+                "endTime": 4.6
+            },
+            {
+                "word": "sweep.",
+                "startTime": 4.6,
+                "endTime": 5.2
+            },
+            {
+                "word": "The",
+                "startTime": 5.2,
+                "endTime": 5.3
+            },
+            {
+                "word": "Central",
+                "startTime": 5.3,
+                "endTime": 5.6
+            },
+            {
+                "word": "and",
+                "startTime": 5.6,
+                "endTime": 5.9
+            },
+            {
+                "word": "Southern",
+                "startTime": 5.9,
+                "endTime": 6.1
+            },
+            {
+                "word": "United",
+                "startTime": 6.1,
+                "endTime": 6.5
+            },
+            {
+                "word": "States.",
+                "startTime": 6.5,
+                "endTime": 6.9
+            },
+            {
+                "word": "The",
+                "startTime": 6.9,
+                "endTime": 7.9
+            },
+            {
+                "word": "state",
+                "startTime": 7.9,
+                "endTime": 8.1
+            },
+            {
+                "word": "of",
+                "startTime": 8.1,
+                "endTime": 8.1
+            },
+            {
+                "word": "Missouri",
+                "startTime": 8.1,
+                "endTime": 8.6
+            },
+            {
+                "word": "is",
+                "startTime": 8.6,
+                "endTime": 8.9
+            },
+            {
+                "word": "recorded",
+                "startTime": 8.9,
+                "endTime": 9.2
+            },
+            {
+                "word": "more",
+                "startTime": 9.2,
+                "endTime": 9.4
+            },
+            {
+                "word": "fatalities",
+                "startTime": 9.4,
+                "endTime": 10.1
+            },
+            {
+                "word": "than",
+                "startTime": 10.1,
+                "endTime": 10.2
+            },
+            {
+                "word": "any",
+                "startTime": 10.2,
+                "endTime": 10.6
+            },
+            {
+                "word": "other",
+                "startTime": 10.6,
+                "endTime": 10.6
+            },
+            {
+                "word": "state",
+                "startTime": 10.6,
+                "endTime": 11
+            },
+            {
+                "word": "with",
+                "startTime": 11,
+                "endTime": 11.1
+            },
+            {
+                "word": "extreme",
+                "startTime": 11.1,
+                "endTime": 11.8
+            },
+            {
+                "word": "weather",
+                "startTime": 11.8,
+                "endTime": 12
+            },
+            {
+                "word": "killing",
+                "startTime": 12,
+                "endTime": 12.7
+            },
+            {
+                "word": "12,",
+                "startTime": 12.7,
+                "endTime": 13
+            },
+            {
+                "word": "people",
+                "startTime": 13,
+                "endTime": 13.4
+            },
+            {
+                "word": "high",
+                "startTime": 13.4,
+                "endTime": 14.5
+            },
+            {
+                "word": "winds",
+                "startTime": 14.5,
+                "endTime": 14.6
+            },
+            {
+                "word": "knocked",
+                "startTime": 14.6,
+                "endTime": 14.9
+            },
+            {
+                "word": "out,",
+                "startTime": 14.9,
+                "endTime": 15.2
+            },
+            {
+                "word": "power",
+                "startTime": 15.2,
+                "endTime": 15.5
+            },
+            {
+                "word": "to",
+                "startTime": 15.5,
+                "endTime": 15.8
+            },
+            {
+                "word": "more",
+                "startTime": 15.8,
+                "endTime": 16
+            },
+            {
+                "word": "than",
+                "startTime": 16,
+                "endTime": 16
+            },
+            {
+                "word": "250,000",
+                "startTime": 16,
+                "endTime": 17.3
+            },
+            {
+                "word": "homes",
+                "startTime": 17.3,
+                "endTime": 17.7
+            },
+            {
+                "word": "and",
+                "startTime": 17.7,
+                "endTime": 18.8
+            },
+            {
+                "word": "businesses",
+                "startTime": 18.8,
+                "endTime": 19.1
+            },
+            {
+                "word": "in",
+                "startTime": 19.1,
+                "endTime": 19.3
+            },
+            {
+                "word": "Texas",
+                "startTime": 19.3,
+                "endTime": 19.9
+            },
+            {
+                "word": "Arkansas,",
+                "startTime": 19.9,
+                "endTime": 20.8
+            },
+            {
+                "word": "Missouri,",
+                "startTime": 20.8,
+                "endTime": 21.4
+            },
+            {
+                "word": "Michigan,",
+                "startTime": 21.4,
+                "endTime": 21.9
+            },
+            {
+                "word": "Illinois,",
+                "startTime": 21.9,
+                "endTime": 22.4
+            },
+            {
+                "word": "Indiana",
+                "startTime": 22.4,
+                "endTime": 23.1
+            },
+            {
+                "word": "and",
+                "startTime": 23.1,
+                "endTime": 23.8
+            },
+            {
+                "word": "Mississippi,",
+                "startTime": 23.8,
+                "endTime": 24.3
+            },
+            {
+                "word": "Laura",
+                "startTime": 24.3,
+                "endTime": 25.1
+            },
+            {
+                "word": "Trent",
+                "startTime": 25.1,
+                "endTime": 25.3
+            },
+            {
+                "word": "reports.",
+                "startTime": 25.3,
+                "endTime": 25.7
+            }
+        ]
+    },
+    {
+        "text": " It's here.",
+        "words": [
+            {
+                "word": "It's",
+                "startTime": 27.2,
+                "endTime": 27.5
+            },
+            {
+                "word": "here.",
+                "startTime": 27.5,
+                "endTime": 27.7
+            }
+        ]
+    },
+    {
+        "text": " It's a storm system. That's whipped multiple tornadoes across several states in the South and Midwest.",
+        "words": [
+            {
+                "word": "It's",
+                "startTime": 37.1,
+                "endTime": 38.3
+            },
+            {
+                "word": "a",
+                "startTime": 38.3,
+                "endTime": 38.5
+            },
+            {
+                "word": "storm",
+                "startTime": 38.5,
+                "endTime": 39
+            },
+            {
+                "word": "system.",
+                "startTime": 39,
+                "endTime": 39.4
+            },
+            {
+                "word": "That's",
+                "startTime": 39.4,
+                "endTime": 39.7
+            },
+            {
+                "word": "whipped",
+                "startTime": 39.7,
+                "endTime": 40.3
+            },
+            {
+                "word": "multiple",
+                "startTime": 40.3,
+                "endTime": 40.9
+            },
+            {
+                "word": "tornadoes",
+                "startTime": 40.9,
+                "endTime": 41.6
+            },
+            {
+                "word": "across",
+                "startTime": 41.6,
+                "endTime": 41.9
+            },
+            {
+                "word": "several",
+                "startTime": 41.9,
+                "endTime": 42.5
+            },
+            {
+                "word": "states",
+                "startTime": 42.5,
+                "endTime": 43
+            },
+            {
+                "word": "in",
+                "startTime": 43,
+                "endTime": 43.3
+            },
+            {
+                "word": "the",
+                "startTime": 43.3,
+                "endTime": 43.4
+            },
+            {
+                "word": "South",
+                "startTime": 43.4,
+                "endTime": 43.7
+            },
+            {
+                "word": "and",
+                "startTime": 43.7,
+                "endTime": 44
+            },
+            {
+                "word": "Midwest.",
+                "startTime": 44,
+                "endTime": 44.7
+            }
+        ]
+    },
+    {
+        "text": " Here in Missouri, the rain pawed as the Windsor through homes and businesses.",
+        "words": [
+            {
+                "word": "Here",
+                "startTime": 49.8,
+                "endTime": 50.3
+            },
+            {
+                "word": "in",
+                "startTime": 50.3,
+                "endTime": 50.5
+            },
+            {
+                "word": "Missouri,",
+                "startTime": 50.5,
+                "endTime": 50.6
+            },
+            {
+                "word": "the",
+                "startTime": 50.6,
+                "endTime": 50.9
+            },
+            {
+                "word": "rain",
+                "startTime": 50.9,
+                "endTime": 51.3
+            },
+            {
+                "word": "pawed",
+                "startTime": 51.3,
+                "endTime": 52
+            },
+            {
+                "word": "as",
+                "startTime": 52,
+                "endTime": 52.1
+            },
+            {
+                "word": "the",
+                "startTime": 52.1,
+                "endTime": 52.3
+            },
+            {
+                "word": "Windsor",
+                "startTime": 52.3,
+                "endTime": 53.2
+            },
+            {
+                "word": "through",
+                "startTime": 53.2,
+                "endTime": 53.4
+            },
+            {
+                "word": "homes",
+                "startTime": 53.4,
+                "endTime": 53.9
+            },
+            {
+                "word": "and",
+                "startTime": 53.9,
+                "endTime": 54.2
+            },
+            {
+                "word": "businesses.",
+                "startTime": 54.2,
+                "endTime": 54.9
+            }
+        ]
+    },
+    {
+        "text": " Long lasting tornadoes sweat Saint, Louis. The National Weather Service gave multiple tornado warnings. Urging people to get off the road to a shelter or basement.",
+        "words": [
+            {
+                "word": "Long",
+                "startTime": 56.3,
+                "endTime": 56.6
+            },
+            {
+                "word": "lasting",
+                "startTime": 56.6,
+                "endTime": 57.2
+            },
+            {
+                "word": "tornadoes",
+                "startTime": 57.2,
+                "endTime": 57.9
+            },
+            {
+                "word": "sweat",
+                "startTime": 57.9,
+                "endTime": 58.4
+            },
+            {
+                "word": "Saint,",
+                "startTime": 58.4,
+                "endTime": 58.8
+            },
+            {
+                "word": "Louis.",
+                "startTime": 58.8,
+                "endTime": 59.1
+            },
+            {
+                "word": "The",
+                "startTime": 59.1,
+                "endTime": 60.3
+            },
+            {
+                "word": "National",
+                "startTime": 60.3,
+                "endTime": 60.6
+            },
+            {
+                "word": "Weather",
+                "startTime": 60.6,
+                "endTime": 61
+            },
+            {
+                "word": "Service",
+                "startTime": 61,
+                "endTime": 61.4
+            },
+            {
+                "word": "gave",
+                "startTime": 61.4,
+                "endTime": 61.7
+            },
+            {
+                "word": "multiple",
+                "startTime": 61.7,
+                "endTime": 62.4
+            },
+            {
+                "word": "tornado",
+                "startTime": 62.4,
+                "endTime": 63
+            },
+            {
+                "word": "warnings.",
+                "startTime": 63,
+                "endTime": 63.6
+            },
+            {
+                "word": "Urging",
+                "startTime": 63.6,
+                "endTime": 64.4
+            },
+            {
+                "word": "people",
+                "startTime": 64.4,
+                "endTime": 64.5
+            },
+            {
+                "word": "to",
+                "startTime": 64.5,
+                "endTime": 65
+            },
+            {
+                "word": "get",
+                "startTime": 65,
+                "endTime": 65
+            },
+            {
+                "word": "off",
+                "startTime": 65,
+                "endTime": 65.1
+            },
+            {
+                "word": "the",
+                "startTime": 65.1,
+                "endTime": 65.3
+            },
+            {
+                "word": "road",
+                "startTime": 65.3,
+                "endTime": 65.6
+            },
+            {
+                "word": "to",
+                "startTime": 65.6,
+                "endTime": 66.2
+            },
+            {
+                "word": "a",
+                "startTime": 66.2,
+                "endTime": 66.5
+            },
+            {
+                "word": "shelter",
+                "startTime": 66.5,
+                "endTime": 66.6
+            },
+            {
+                "word": "or",
+                "startTime": 66.6,
+                "endTime": 67.1
+            },
+            {
+                "word": "basement.",
+                "startTime": 67.1,
+                "endTime": 67.4
+            }
+        ]
+    },
+    {
+        "text": " In Bartlett County Missouri, community's assess the damage.",
+        "words": [
+            {
+                "word": "In",
+                "startTime": 68.3,
+                "endTime": 68.5
+            },
+            {
+                "word": "Bartlett",
+                "startTime": 68.5,
+                "endTime": 69.1
+            },
+            {
+                "word": "County",
+                "startTime": 69.1,
+                "endTime": 69.2
+            },
+            {
+                "word": "Missouri,",
+                "startTime": 69.2,
+                "endTime": 69.8
+            },
+            {
+                "word": "community's",
+                "startTime": 69.8,
+                "endTime": 71
+            },
+            {
+                "word": "assess",
+                "startTime": 71,
+                "endTime": 71.5
+            },
+            {
+                "word": "the",
+                "startTime": 71.5,
+                "endTime": 71.7
+            },
+            {
+                "word": "damage.",
+                "startTime": 71.7,
+                "endTime": 72.2
+            }
+        ]
+    },
+    {
+        "text": " Everything around. It here is really bad. The trailer park up up. The street had fatalities",
+        "words": [
+            {
+                "word": "Everything",
+                "startTime": 73.3,
+                "endTime": 73.8
+            },
+            {
+                "word": "around.",
+                "startTime": 73.8,
+                "endTime": 74.3
+            },
+            {
+                "word": "It",
+                "startTime": 74.3,
+                "endTime": 74.4
+            },
+            {
+                "word": "here",
+                "startTime": 74.4,
+                "endTime": 74.5
+            },
+            {
+                "word": "is",
+                "startTime": 74.5,
+                "endTime": 74.7
+            },
+            {
+                "word": "really",
+                "startTime": 74.7,
+                "endTime": 74.8
+            },
+            {
+                "word": "bad.",
+                "startTime": 74.8,
+                "endTime": 75.1
+            },
+            {
+                "word": "The",
+                "startTime": 75.1,
+                "endTime": 76
+            },
+            {
+                "word": "trailer",
+                "startTime": 76,
+                "endTime": 76.1
+            },
+            {
+                "word": "park",
+                "startTime": 76.1,
+                "endTime": 76.4
+            },
+            {
+                "word": "up",
+                "startTime": 76.4,
+                "endTime": 76.6
+            },
+            {
+                "word": "up.",
+                "startTime": 76.6,
+                "endTime": 77
+            },
+            {
+                "word": "The",
+                "startTime": 77,
+                "endTime": 77.3
+            },
+            {
+                "word": "street",
+                "startTime": 77.3,
+                "endTime": 77.4
+            },
+            {
+                "word": "had",
+                "startTime": 77.4,
+                "endTime": 77.7
+            },
+            {
+                "word": "fatalities",
+                "startTime": 77.7,
+                "endTime": 78.4
+            }
+        ]
+    },
+    {
+        "text": " So I mean we don't have nothing compared anything like that. I still have a home, they don't",
+        "words": [
+            {
+                "word": "So",
+                "startTime": 79.1,
+                "endTime": 79.3
+            },
+            {
+                "word": "I",
+                "startTime": 79.3,
+                "endTime": 79.8
+            },
+            {
+                "word": "mean",
+                "startTime": 79.8,
+                "endTime": 79.8
+            },
+            {
+                "word": "we",
+                "startTime": 79.8,
+                "endTime": 80.2
+            },
+            {
+                "word": "don't",
+                "startTime": 80.2,
+                "endTime": 80.4
+            },
+            {
+                "word": "have",
+                "startTime": 80.4,
+                "endTime": 80.5
+            },
+            {
+                "word": "nothing",
+                "startTime": 80.5,
+                "endTime": 80.8
+            },
+            {
+                "word": "compared",
+                "startTime": 80.8,
+                "endTime": 81.2
+            },
+            {
+                "word": "anything",
+                "startTime": 81.2,
+                "endTime": 81.4
+            },
+            {
+                "word": "like",
+                "startTime": 81.4,
+                "endTime": 81.6
+            },
+            {
+                "word": "that.",
+                "startTime": 81.6,
+                "endTime": 81.8
+            },
+            {
+                "word": "I",
+                "startTime": 81.8,
+                "endTime": 82.1
+            },
+            {
+                "word": "still",
+                "startTime": 82.1,
+                "endTime": 82.3
+            },
+            {
+                "word": "have",
+                "startTime": 82.3,
+                "endTime": 82.4
+            },
+            {
+                "word": "a",
+                "startTime": 82.4,
+                "endTime": 82.6
+            },
+            {
+                "word": "home,",
+                "startTime": 82.6,
+                "endTime": 82.8
+            },
+            {
+                "word": "they",
+                "startTime": 82.8,
+                "endTime": 83.2
+            },
+            {
+                "word": "don't",
+                "startTime": 83.2,
+                "endTime": 83.4
+            }
+        ]
+    },
+    {
+        "text": " The severe weather triggered, deadly dust, storms, and fanned wildfires. There were evacuations in parts of Oklahoma as more than 135 were reported across the state.",
+        "words": [
+            {
+                "word": "The",
+                "startTime": 85.4,
+                "endTime": 86
+            },
+            {
+                "word": "severe",
+                "startTime": 86,
+                "endTime": 86.1
+            },
+            {
+                "word": "weather",
+                "startTime": 86.1,
+                "endTime": 86.3
+            },
+            {
+                "word": "triggered,",
+                "startTime": 86.3,
+                "endTime": 87
+            },
+            {
+                "word": "deadly",
+                "startTime": 87,
+                "endTime": 87.1
+            },
+            {
+                "word": "dust,",
+                "startTime": 87.1,
+                "endTime": 87.5
+            },
+            {
+                "word": "storms,",
+                "startTime": 87.5,
+                "endTime": 88.1
+            },
+            {
+                "word": "and",
+                "startTime": 88.1,
+                "endTime": 88.3
+            },
+            {
+                "word": "fanned",
+                "startTime": 88.3,
+                "endTime": 89
+            },
+            {
+                "word": "wildfires.",
+                "startTime": 89,
+                "endTime": 89.8
+            },
+            {
+                "word": "There",
+                "startTime": 89.8,
+                "endTime": 90.6
+            },
+            {
+                "word": "were",
+                "startTime": 90.6,
+                "endTime": 90.6
+            },
+            {
+                "word": "evacuations",
+                "startTime": 90.6,
+                "endTime": 91.6
+            },
+            {
+                "word": "in",
+                "startTime": 91.6,
+                "endTime": 91.9
+            },
+            {
+                "word": "parts",
+                "startTime": 91.9,
+                "endTime": 92.1
+            },
+            {
+                "word": "of",
+                "startTime": 92.1,
+                "endTime": 92.1
+            },
+            {
+                "word": "Oklahoma",
+                "startTime": 92.1,
+                "endTime": 92.7
+            },
+            {
+                "word": "as",
+                "startTime": 92.7,
+                "endTime": 93.4
+            },
+            {
+                "word": "more",
+                "startTime": 93.4,
+                "endTime": 93.6
+            },
+            {
+                "word": "than",
+                "startTime": 93.6,
+                "endTime": 93.7
+            },
+            {
+                "word": "135",
+                "startTime": 93.7,
+                "endTime": 94.9
+            },
+            {
+                "word": "were",
+                "startTime": 94.9,
+                "endTime": 95.3
+            },
+            {
+                "word": "reported",
+                "startTime": 95.3,
+                "endTime": 95.7
+            },
+            {
+                "word": "across",
+                "startTime": 95.7,
+                "endTime": 96.1
+            },
+            {
+                "word": "the",
+                "startTime": 96.1,
+                "endTime": 96.3
+            },
+            {
+                "word": "state.",
+                "startTime": 96.3,
+                "endTime": 96.7
+            }
+        ]
+    },
+    {
+        "text": " From wins while it's fires and sandstorms to blizzard conditions. In colder areas as the weather sweeps east across the USA with severe, thunderstorms and flash floods expected along the east coast.",
+        "words": [
+            {
+                "word": "From",
+                "startTime": 98.2,
+                "endTime": 100.1
+            },
+            {
+                "word": "wins",
+                "startTime": 100.1,
+                "endTime": 100.6
+            },
+            {
+                "word": "while",
+                "startTime": 100.6,
+                "endTime": 101
+            },
+            {
+                "word": "it's",
+                "startTime": 101,
+                "endTime": 101.4
+            },
+            {
+                "word": "fires",
+                "startTime": 101.4,
+                "endTime": 101.6
+            },
+            {
+                "word": "and",
+                "startTime": 101.6,
+                "endTime": 101.8
+            },
+            {
+                "word": "sandstorms",
+                "startTime": 101.8,
+                "endTime": 102.7
+            },
+            {
+                "word": "to",
+                "startTime": 102.7,
+                "endTime": 103.1
+            },
+            {
+                "word": "blizzard",
+                "startTime": 103.1,
+                "endTime": 103.7
+            },
+            {
+                "word": "conditions.",
+                "startTime": 103.7,
+                "endTime": 104.3
+            },
+            {
+                "word": "In",
+                "startTime": 104.3,
+                "endTime": 104.4
+            },
+            {
+                "word": "colder",
+                "startTime": 104.4,
+                "endTime": 104.9
+            },
+            {
+                "word": "areas",
+                "startTime": 104.9,
+                "endTime": 105.4
+            },
+            {
+                "word": "as",
+                "startTime": 105.4,
+                "endTime": 105.7
+            },
+            {
+                "word": "the",
+                "startTime": 105.7,
+                "endTime": 105.8
+            },
+            {
+                "word": "weather",
+                "startTime": 105.8,
+                "endTime": 106.1
+            },
+            {
+                "word": "sweeps",
+                "startTime": 106.1,
+                "endTime": 106.6
+            },
+            {
+                "word": "east",
+                "startTime": 106.6,
+                "endTime": 107.2
+            },
+            {
+                "word": "across",
+                "startTime": 107.2,
+                "endTime": 107.6
+            },
+            {
+                "word": "the",
+                "startTime": 107.6,
+                "endTime": 107.8
+            },
+            {
+                "word": "USA",
+                "startTime": 107.8,
+                "endTime": 108.4
+            },
+            {
+                "word": "with",
+                "startTime": 108.4,
+                "endTime": 109
+            },
+            {
+                "word": "severe,",
+                "startTime": 109,
+                "endTime": 109.6
+            },
+            {
+                "word": "thunderstorms",
+                "startTime": 109.6,
+                "endTime": 110.3
+            },
+            {
+                "word": "and",
+                "startTime": 110.3,
+                "endTime": 110.5
+            },
+            {
+                "word": "flash",
+                "startTime": 110.5,
+                "endTime": 110.9
+            },
+            {
+                "word": "floods",
+                "startTime": 110.9,
+                "endTime": 111.4
+            },
+            {
+                "word": "expected",
+                "startTime": 111.4,
+                "endTime": 112.1
+            },
+            {
+                "word": "along",
+                "startTime": 112.1,
+                "endTime": 112.6
+            },
+            {
+                "word": "the",
+                "startTime": 112.6,
+                "endTime": 112.7
+            },
+            {
+                "word": "east",
+                "startTime": 112.7,
+                "endTime": 113
+            },
+            {
+                "word": "coast.",
+                "startTime": 113,
+                "endTime": 113.3
+            }
+        ]
+    },
+    {
+        "text": " Laura Trant. BBC News.",
+        "words": [
+            {
+                "word": "Laura",
+                "startTime": 114.7,
+                "endTime": 115
+            },
+            {
+                "word": "Trant.",
+                "startTime": 115,
+                "endTime": 115.5
+            },
+            {
+                "word": "BBC",
+                "startTime": 115.5,
+                "endTime": 116.1
+            },
+            {
+                "word": "News.",
+                "startTime": 116.1,
+                "endTime": 116.4
+            }
+        ]
+    }
+]
+
+
+//문장 분리
+function engSentenceGrouping(inputtext) {
+
+    //문장부호를 기준으로 문장 분리
+    let sentences = inputtext.split(/([.?!])/).filter(Boolean); //영어는 ,도 사용
+
+    // 문장 부호를 포함하여 다시 결합
+    let groupedSentences = [];
+    for (let i = 0; i < sentences.length; i += 2) {
+        let sentence = sentences[i] + (sentences[i + 1] || ""); // 문장 부호 포함
+        groupedSentences.push(sentence.trim());
+    }
+    return groupedSentences;
+}
+
+
+//타임 스탬프 추출
+function engGettimestamp(script) {
+    let groupedSentences = engSentenceGrouping(script.text);
+    let timestamp = [];
+
+    let wordindex = 0;//현재 문장내 단어 위치
+
+    let start = 0;
+    let end = 0;
+    //script.word, script.text, script.startTime, script.endTime
+    groupedSentences.forEach((sentence) => {
+        sentence = sentence.trim();
+        let temp = "";
+        start = script.words[wordindex].startTime;
+        while (temp.length < sentence.length && wordindex < script.words.length) {
+            temp += script.words[wordindex].word;
+            temp += " ";
+            wordindex++;
+        }
+        end = script.words[wordindex - 1].endTime;
+        temp = temp.trim();
+        timestamp.push({temp, start, end});
+
+    })
+    return timestamp;
+}
+
+//최종 export 함수
+//기존 json파일을 입력 -> timestamp와 문장을 반환
+//[[{sentence:문장(str), start: 시작시간(num), end: 종료시간(num)}], ...]
+function engScriptGrouping(scripts) {
+    let scriptTimestamp = [];
+    scripts.forEach((script) => {
+        scriptTimestamp.push(engGettimestamp(script));
+    })
+    return scriptTimestamp;
+}
+
+
+exports.engScriptGrouping = engScriptGrouping;
