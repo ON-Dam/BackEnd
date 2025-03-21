@@ -4169,7 +4169,11 @@ function engGettimestamp(script) {
         }
         end = script.words[wordindex - 1].endTime;
         temp = temp.trim();
-        timestamp.push({temp, start, end});
+        timestamp.push({
+            문장: temp,
+            시작: start,
+            끝: end
+        });
 
     })
     return timestamp;
