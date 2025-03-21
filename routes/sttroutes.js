@@ -129,8 +129,9 @@ router.post('/converttest', upload.single('video'), async (req, res) => {
     const videoPath = `test/${UUID}/originalVideo${ext}`;
     const audioPath = `test/${UUID}/originalVideo.wav`;
     const scriptPath = `test/${UUID}/script.json`;
-    const timestampPath = `test/${UUID}/timestamp.json`;
-
+    const engtimestampPath = `test/${UUID}/engtimestamp.json`;
+    const kortimestampPath = `test/${UUID}/kortimestamp.json`;
+    const transbucket = 'ondam_basictext';
     try {
         bucketUpload(videobucket, videoPath, req.file.buffer);
         console.log(`영상 업로드 완료: ${videoPath}`);
@@ -160,7 +161,9 @@ router.post('/converttest', upload.single('video'), async (req, res) => {
     try {
         // ⏱️ Timestamp JSON 저장
         let timestampJson = JSON.stringify(engScriptGrouping(transcription), null, 2);
-        await bucketUpload(bucketname, timestampPath, timestampJson);
+        bucketUpload(bucketname, engtimestampPath, timestampJson);
+        bucketUpload(transbucket, kortimestampPath, timestampJson);
+        await watchStorageChanges(bucketname, kortimestampPath);
         console.log('Timestamp 저장 완료');
     } catch (error) {
         console.error(`imestamp 저장 실패:`, error);
