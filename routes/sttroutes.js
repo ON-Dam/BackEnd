@@ -6,6 +6,7 @@ const multer = require("multer");
 const {stt} = require("../controller/stt");
 const {bucketUpload} = require("../controller/bucketUpload");
 const {convertWav} = require("../controller/convertWav");
+const {scriptGrouping} = require("../controller/scriptGrouping");
 
 
 const router = express.Router();
@@ -31,7 +32,7 @@ router.post('/videoconvert', upload.single('video'), async (req, res) => {
     const videoPath = `test/${UUID}/originalVideo${ext}`; //영상 저장 위치
     const audioPath = `test/${UUID}/audio.wav`; // 음성파일 저장 위치
     const ScriptPath = `test/${UUID}/script.json`; // 스크립트 저장 위치
-
+    const timestampPath = `test/${UUID}/timestamp.json`;
     // 영상 업로드
     try {
         await bucketUpload(bucketname, videoPath, req.file.buffer);
@@ -49,17 +50,23 @@ router.post('/videoconvert', upload.single('video'), async (req, res) => {
         console.error(error);
         res.status(500).json({message: "변환 실패", error: error.message});
     }
-
+    let transcription;
     //STT
     try {
-        const transcription = await stt(bucketname, audioPath, ScriptPath);
+        transcription = await stt(bucketname, audioPath, ScriptPath);
         console.log('변환 성공')
     } catch (error) {
         res.status(500).json({success: false, error: error.message});
     }
-    
-    console.log('stt완료');
 
+    //timestamp
+    try {
+        let timestampJson = JSON.stringify(scriptGrouping(transcription), null, 2);
+        await bucketUpload(bucketname, timestampPath, timestampJson);
+    } catch (error) {
+        res.status(500).json({success: false, error: error.message});
+    }
+    console.log('stt완료');
 });
 
 

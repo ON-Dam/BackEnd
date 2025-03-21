@@ -21,16 +21,16 @@
 
 - 설명: 업로드된 영상을 Google Cloud Storage에 저장하고, 음성을 추출한 후 STT 변환 수행
 - 요청 (Form-Data):
-    - `video`: 업로드할 영상 파일
+  - `video`: 업로드할 영상 파일
 - 처리 과정:
     1. UUID를 생성하여 변환에 고유 ID 부여
     2. 영상을 `test/{UUID}/originalVideo.{ext}` 경로에 저장
     3. 음성 파일을 `test/{UUID}/audio.wav`로 변환하여 저장
     4. STT를 수행하여 결과를 `test/{UUID}/script.json`에 저장
 - 응답:
-    - 200 OK: 변환 성공
-    - 400 Bad Request: 파일이 업로드되지 않음
-    - 500 Internal Server Error: 업로드, 변환, STT 수행 중 오류 발생
+  - 200 OK: 변환 성공
+  - 400 Bad Request: 파일이 업로드되지 않음
+  - 500 Internal Server Error: 업로드, 변환, STT 수행 중 오류 발생
 
 ---
 
@@ -39,6 +39,7 @@
 - 업로드된 영상: `ondam_storage/test/{UUID}/originalVideo.{확장자}`
 - 변환된 오디오 파일: `ondam_storage/test/{UUID}/audio.wav`
 - STT 결과 스크립트: `ondam_storage/test/{UUID}/script.json`
+- Translation 결과 스크립트 : `ondam_storage/test/{UUID}/timeStamp.json`
 
 ---
 
@@ -54,5 +55,7 @@
 - **controller / bucketUpload**: Google Cloud Storage로 파일 업로드 수행
 - **controller / convertWav**: 업로드된 영상에서 오디오 파일 추출
 - **controller / stt**: Google Cloud Speech-to-Text API를 이용하여 STT 변환 수행
+- Cloud Run 파일 처리 함수:
+  - Cloud Storage 버킷의 파일 업로드 이벤트를 감지하여 자동으로 파일 처리를 수행
 
 ---
