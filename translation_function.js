@@ -34,10 +34,9 @@ functions.cloudEvent('requestHandler', async (cloudevent) => {
       translatedText += `${translation.translatedText}\n`;
     }
 
-    const dt = new Date();
     const targetBucketName = 'ondam_storage';
     const targetBucket = storage.bucket(targetBucketName);
-    const outputFileName = `translations_test/script_${dt.toISOString().replace(/[:.]/g, '_')}.txt`;
+    const outputFileName = `${fileName}`;
     const outputFile = targetBucket.file(outputFileName);
 
     await outputFile.save(translatedText, {
