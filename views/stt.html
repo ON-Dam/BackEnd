@@ -19,6 +19,14 @@
             border-radius: 10px;
         }
 
+        input[type="file"],
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 10px;
+            box-sizing: border-box;
+        }
+
         video {
             width: 100%;
             margin-top: 10px;
@@ -28,45 +36,106 @@
             margin-top: 10px;
             padding: 10px 20px;
             font-size: 16px;
+            cursor: pointer;
+        }
+
+        .divider {
+            margin: 20px 0;
+            border-top: 1px solid #ccc;
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <h2>비디오 업로드</h2>
+    <h2>비디오 파일 업로드</h2>
     <input type="file" id="videoInput" accept="video/*">
     <video id="videoPreview" controls style="display:none;"></video>
-    <button id="uploadBtn" disabled>업로드</button>
+
+    <button id="uploadKorBtn" disabled>📤 한국어 영상 업로드</button>
+    <button id="uploadEngBtn" disabled>📤 영어 영상 업로드</button>
+
+    <div class="divider"></div>
+
+    <h2>YouTube 영상 업로드</h2>
+    <input type="text" id="youtubeUrl" placeholder="YouTube 링크를 입력하세요">
+    <button id="youtubeUploadBtn">YouTube 업로드</button>
 </div>
 
 <script>
     const videoInput = document.getElementById("videoInput");
     const videoPreview = document.getElementById("videoPreview");
-    const uploadBtn = document.getElementById("uploadBtn");
+    const uploadKorBtn = document.getElementById("uploadKorBtn");
+    const uploadEngBtn = document.getElementById("uploadEngBtn");
+    const youtubeUrlInput = document.getElementById("youtubeUrl");
+    const youtubeUploadBtn = document.getElementById("youtubeUploadBtn");
 
+    // 📹 로컬 비디오 미리보기
     videoInput.addEventListener("change", function () {
         const file = videoInput.files[0];
         if (file) {
             const url = URL.createObjectURL(file);
             videoPreview.src = url;
             videoPreview.style.display = "block";
-            uploadBtn.disabled = false;
+            uploadKorBtn.disabled = false;
+            uploadEngBtn.disabled = false;
         }
     });
 
-    uploadBtn.addEventListener("click", function () {
+    // 📤 한국어 영상 업로드
+    uploadKorBtn.addEventListener("click", function () {
         const file = videoInput.files[0];
         if (!file) return alert("비디오를 선택하세요.");
 
         const formData = new FormData();
         formData.append("video", file);
 
-        fetch("/stt/videoconvert", {
+        fetch("/stt/korvideoconvert", {
             method: "POST",
             body: formData
         })
-            .then(response => response.ok ? alert("업로드 성공!") : alert("업로드 실패"))
-            .catch(error => console.error("업로드 오류:", error));
+            .then(response => response.ok ? alert("✅ 한국어 업로드 성공!") : alert("❌ 한국어 업로드 실패"))
+            .catch(error => {
+                console.error("한국어 업로드 오류:", error);
+                alert("❌ 업로드 중 오류 발생");
+            });
+    });
+
+    // 📤 영어 영상 업로드
+    uploadEngBtn.addEventListener("click", function () {
+        const file = videoInput.files[0];
+        if (!file) return alert("비디오를 선택하세요.");
+
+        const formData = new FormData();
+        formData.append("video", file);
+
+        fetch("/stt/engvideoconvert", {
+            method: "POST",
+            body: formData
+        })
+            .then(response => response.ok ? alert("✅ 영어 업로드 성공!") : alert("❌ 영어 업로드 실패"))
+            .catch(error => {
+                console.error("영어 업로드 오류:", error);
+                alert("❌ 업로드 중 오류 발생");
+            });
+    });
+
+    // ▶️ 유튜브 링크 업로드
+    youtubeUploadBtn.addEventListener("click", function () {
+        const url = youtubeUrlInput.value.trim();
+        if (!url) return alert("YouTube 링크를 입력하세요.");
+
+        fetch("/stt/youtubeconvert", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({url})
+        })
+            .then(response => response.ok ? alert("✅ 유튜브 업로드 성공!") : alert("❌ 유튜브 업로드 실패"))
+            .catch(error => {
+                console.error("YouTube 업로드 오류:", error);
+                alert("❌ YouTube 업로드 중 오류 발생");
+            });
     });
 </script>
 </body>

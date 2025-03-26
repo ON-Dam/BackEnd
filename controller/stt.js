@@ -1,7 +1,7 @@
 const {SpeechClient} = require('@google-cloud/speech');
 const {bucketUpload} = require("./bucketUpload");
 
-async function stt(bucketName, audioFilePath, outputFilePath) {
+async function stt(bucketName, audioFilePath, outputFilePath, language) {
     try {
         const speechClient = new SpeechClient();
         const audioUri = `gs://${bucketName}/${audioFilePath}`;//오디오 위치
@@ -11,7 +11,7 @@ async function stt(bucketName, audioFilePath, outputFilePath) {
         const config = {
             encoding: 'LINEAR16',  // 인코딩
             sampleRateHertz: 44100,  // 샘플링 레이트
-            languageCode: 'ko-KR', // 언어
+            languageCode: language, // 언어
             enableWordTimeOffsets: true,  // 단어별 타임스탬프
             enableAutomaticPunctuation: true,  // 문장 부호
             useEnhanced: true,  // 향상된 모델
