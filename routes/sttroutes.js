@@ -2,13 +2,12 @@ const express = require('express');
 const path = require("path");
 const {v1: uuidv1} = require("uuid");
 const multer = require("multer");
-
 const {stt} = require("../controller/stt");
 const {bucketUpload} = require("../controller/bucketUpload");
 const {convertWav} = require("../controller/convertWav");
 const {korScriptGrouping, engScriptGrouping} = require("../controller/scriptGrouping");
 const watchStorageChanges = require("../controller/storageWatcher");
-
+const {downloadYoutubeVideo} = require('../controller/youtubeDownload');
 
 const router = express.Router();
 const bucketname = 'ondam_storage';
@@ -32,7 +31,7 @@ router.post('/korvideoconvert', upload.single('video'), async (req, res) => {
     const ext = path.extname(req.file.originalname);//영상 확장자
     const videoPath = `test/${UUID}/originalVideo${ext}`; //영상 저장 위치
     const audioPath = `test/${UUID}/audio.wav`; // 음성파일 저장 위치
-    const ScriptPath = `test/${UUID}/script.json`; // 스크립트 저장 위치
+    const scriptPath = `test/${UUID}/script.json`; // 스크립트 저장 위치
     const timestampPath = `test/${UUID}/timestamp.json`;
     // 영상 업로드
     try {
@@ -54,12 +53,11 @@ router.post('/korvideoconvert', upload.single('video'), async (req, res) => {
     let transcription;
     //STT
     try {
-        transcription = await stt(bucketname, audioPath, ScriptPath, 'ko-KR');
+        transcription = await stt(bucketname, audioPath, scriptPath, 'ko-KR');
         console.log('변환 성공')
     } catch (error) {
         res.status(500).json({success: false, error: error.message});
     }
-
     //timestamp
     try {
         let timestampJson = JSON.stringify(korScriptGrouping(transcription), null, 2);
@@ -70,7 +68,7 @@ router.post('/korvideoconvert', upload.single('video'), async (req, res) => {
     console.log('stt완료');
 });
 
-router.post('/engconvert', upload.single('video'), async (req, res) => {
+router.post('/engvideoconvert', upload.single('video'), async (req, res) => {
     //영상 업로드
     console.log('처리시작');
     if (!req.file) {
@@ -174,5 +172,26 @@ router.post('/converttest', upload.single('video'), async (req, res) => {
     return res.status(200).json({success: true, message: "STT 완료", uuid: UUID}); // ✅ `return` 추가하여 응답 중복 방지
 });
 
+router.post('/youtubeconvert', async (req, res) => {
+    console.log('처리 시작 (YouTube 버전)');
+
+    const {url} = req.body || {};
+    if (!url) {
+        return res.status(400).json({message: "YouTube URL이 필요합니다."});
+    }
+
+    const UUID = uuidv1();
+    const videoPath = `test/${UUID}/originalVideo.wav`;
+
+    try {
+        // ✅ YouTube 영상 다운로드 및 GCS 업로드
+        downloadYoutubeVideo(url, bucketname, videoPath);
+        console.log(`✅ YouTube 영상 업로드 완료: ${videoPath}`);
+    } catch (error) {
+        console.error(`유튜브 업로드 실패:`, error);
+        return res.status(500).json({message: "유튜브 업로드 실패", error: error.message});
+    }
+    await watchStorageChanges(bucketname, videoPath);
+});
 
 module.exports = router;

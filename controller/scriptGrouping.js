@@ -2936,7 +2936,11 @@ function korGettimestamp(script) {
         }
 
         end = script.words[wordindex - 1].endTime;
-        timestamp.push({sentence, start, end});
+        timestamp.push({
+            문장: temp,
+            시작: start,
+            끝: end
+        });
 
         if (wordindex < script.words.length && script.words[wordindex].word == "▁") wordindex++; // 문장 양 끝 공백 제거
 
@@ -2947,7 +2951,7 @@ function korGettimestamp(script) {
 
 //최종 export 함수
 //기존 jsno파일을 입력 -> timestamp와 문장을 반환
-//[[{sentence:문장(str), start: 시작시간(num), end: 종료시간(num)}], ...]
+//[[{문장:문장(str), 시작: 시작시간(num), 끝: 종료시간(num)}], ...]
 function korScriptGrouping(scripts) {
     let scriptTimestamp = [];
     scripts.forEach((script) => {

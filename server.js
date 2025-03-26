@@ -13,6 +13,11 @@ const app = express();
 const PORT = 8080;
 app.set('view engine', 'ejs');
 
+// ✅ JSON 요청을 파싱하기 위한 필수 설정
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         const uploadDir = './uploads/';
