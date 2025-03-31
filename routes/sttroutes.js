@@ -172,7 +172,7 @@ router.post('/converttest', upload.single('video'), async (req, res) => {
     return res.status(200).json({success: true, message: "STT 완료", uuid: UUID}); // ✅ `return` 추가하여 응답 중복 방지
 });
 
-router.post('/youtubeconvert', async (req, res) => {
+router.post('/koryoutubeconvert', async (req, res) => {
     console.log('처리 시작 (YouTube 버전)');
 
     const {url} = req.body || {};
@@ -181,19 +181,84 @@ router.post('/youtubeconvert', async (req, res) => {
     }
 
     const UUID = uuidv1();
-    const videoPath = `test/${UUID}/audio.wav`;
+    const audioPath = `test/${UUID}/audio.wav`;
+    const scriptPath = `test/${UUID}/script.json`; // 스크립트 저장 위치
+    const timestampPath = `test/${UUID}/timestamp.json`;
 
     try {
         // ✅ YouTube 영상 다운로드 및 GCS 업로드
-        downloadYoutubeVideo(url, bucketname, videoPath);
-        console.log(`✅ YouTube 영상 업로드 완료: ${videoPath}`);
+        downloadYoutubeVideo(url, bucketname, audioPath);
+        console.log(`✅ YouTube 영상 업로드 완료: ${audioPath}`);
     } catch (error) {
         console.error(`유튜브 업로드 실패:`, error);
         return res.status(500).json({message: "유튜브 업로드 실패", error: error.message});
     }
-    await watchStorageChanges(bucketname, videoPath);
+    await watchStorageChanges(bucketname, audioPath);
     console.log('업로드 완료');
-    
+    try {
+        // 🎤 STT 실행
+        transcription = await stt(bucketname, audioPath, scriptPath, 'ko-KR');
+        console.log('STT 변환 성공');
+    } catch (error) {
+        console.error(`STT 변환 실패:`, error);
+        return res.status(500).json({success: false, error: error.message});
+    }
+
+    //timestamp
+    try {
+        let timestampJson = JSON.stringify(korScriptGrouping(transcription), null, 2);
+        await bucketUpload(bucketname, timestampPath, timestampJson);
+    } catch (error) {
+        res.status(500).json({success: false, error: error.message});
+    }
+    console.log('STT 완료');
+    return res.status(200).json({success: true, message: "STT 완료", uuid: UUID});
+});
+
+router.post('/engyoutubeconvert', async (req, res) => {
+    console.log('처리 시작 (YouTube 버전)');
+
+    const {url} = req.body || {};
+    if (!url) {
+        return res.status(400).json({message: "YouTube URL이 필요합니다."});
+    }
+    const UUID = uuidv1();//각 변환에 부여되는 Id
+    const audioPath = `test/${UUID}/audio.wav`; // 음성파일 저장 위치
+    const ScriptPath = `test/${UUID}/script.json`; // 스크립트 저장 위치
+    const timestampPath = `test/${UUID}/timestamp.json`;
+    try {
+        // ✅ YouTube 영상 다운로드 및 GCS 업로드
+        downloadYoutubeVideo(url, bucketname, audioPath);
+        console.log(`✅ YouTube 영상 업로드 완료: ${audioPath}`);
+    } catch (error) {
+        console.error(`유튜브 업로드 실패:`, error);
+        return res.status(500).json({message: "유튜브 업로드 실패", error: error.message});
+    }
+    await watchStorageChanges(bucketname, audioPath);
+    console.log('업로드 완료');
+    //영상 업로드
+    console.log('처리시작');
+    if (!req.file) {
+        return res.status(400).json({message: "파일이 없습니다."});
+    }
+
+    let transcription;
+    //STT
+    try {
+        transcription = await stt(bucketname, audioPath, ScriptPath, 'en-US');
+        console.log('변환 성공')
+    } catch (error) {
+        res.status(500).json({success: false, error: error.message});
+    }
+
+    //timestamp
+    try {
+        let timestampJson = JSON.stringify(engScriptGrouping(transcription), null, 2);
+        await bucketUpload(bucketname, timestampPath, timestampJson);
+    } catch (error) {
+        res.status(500).json({success: false, error: error.message});
+    }
+    console.log('stt완료');
 });
 
 module.exports = router;
