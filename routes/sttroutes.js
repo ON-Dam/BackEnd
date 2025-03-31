@@ -181,7 +181,7 @@ router.post('/youtubeconvert', async (req, res) => {
     }
 
     const UUID = uuidv1();
-    const videoPath = `test/${UUID}/originalVideo.wav`;
+    const videoPath = `test/${UUID}/audio.wav`;
 
     try {
         // ✅ YouTube 영상 다운로드 및 GCS 업로드
@@ -192,6 +192,8 @@ router.post('/youtubeconvert', async (req, res) => {
         return res.status(500).json({message: "유튜브 업로드 실패", error: error.message});
     }
     await watchStorageChanges(bucketname, videoPath);
+    console.log('업로드 완료');
+    
 });
 
 module.exports = router;
