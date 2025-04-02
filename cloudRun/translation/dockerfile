@@ -1,0 +1,19 @@
+# Node.js 런타임을 기반 이미지로 사용
+FROM node:16
+
+# 작업 디렉터리 설정
+WORKDIR /app
+
+# package.json 및 package-lock.json 복사 후 의존성 설치
+COPY package*.json ./
+RUN npm install
+
+# 소스코드 전체 복사
+COPY . .
+
+# Cloud Run은 기본적으로 포트 8080을 사용
+ENV PORT=8080
+EXPOSE 8080
+
+# start 스크립트를 실행해서 functions framework로 서버 구동
+CMD ["npm", "start"]
