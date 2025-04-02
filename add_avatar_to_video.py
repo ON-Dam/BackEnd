@@ -1,7 +1,7 @@
 import ffmpeg
 
 
-def video_add(base_video, avatar, output_file='output_video.mp4'):  # 기본 동영상과 아바타 이미지 매개변수
+def video_add(base_video, avatar, output_file='./ex/output_video.mp4'):  # 기본 동영상과 아바타 이미지 매개변수
 
     try:
         # 매개 변수가 경로일 때 쓰는 코드. 미리 ffmpeg-python 스트림 객체면 필요 없음.
