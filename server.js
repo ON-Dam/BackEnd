@@ -1,8 +1,10 @@
 require('dotenv').config();
 
-const {translateTextFromFile}=require('./file_test');
+const {translateTextFromFile} = require('./file_test');
 const express = require('express');
+const multer = require('multer');
 const path = require('path');
+const fs = require('fs');
 const {stt} = require("./controller/stt");
 const {v1: uuidv1} = require('uuid');
 
@@ -11,7 +13,7 @@ const app = express();
 const PORT = 8080;
 app.set('view engine', 'ejs');
 
-
+// ✅ JSON 요청을 파싱하기 위한 필수 설정
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
@@ -49,10 +51,22 @@ app.post('/upload', upload.single('uploadedFile'), async (req, res) => {
 
 });
 
-app.get('/', async (req, res) => {
-    res.render('index');
-    
-});
+
+app.get(`/download/:filename`, (req, res) => {
+    const filePath = path.join(__dirname, 'uploads', req.params.filename);
+
+    if (!fs.existsSync(filePath)) {
+        return res.status(404).send('파일을 찾을 수 없습니다.');
+    }
+
+    res.download(filePath, err => {
+        if (err) {
+            console.error('파일 다운로드 오류:', err);
+            res.status(500).send('파일을 다운로드할 수 없습니다.');
+        }
+    });
+
+})
 
 const sttRoutes = require("./routes/sttroutes");
 app.use('/stt', sttRoutes);
