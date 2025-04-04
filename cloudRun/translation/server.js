@@ -55,6 +55,21 @@ async function processFile(bucketName, fileName) {
   }
 }
 
+async function requestOthAPI(fileName){
+  // 번역 완료 후 다른 API에 알림 전송 (POST 요청)
+    try {
+      const notifyResponse = await axios.post(NOTIFY_API_URL, {
+        fileName,
+        targetBucket: TARGET_BUCKET,
+        status: 'completed'
+      });
+      console.log('알림 전송 완료:', notifyResponse.data);
+    } catch (notifyError) {
+      console.error('알림 전송 오류:', notifyError.message);
+      // 알림 전송 실패 시 로그만 남기고 계속 진행할 수도 있습니다.
+    }
+}
+
 // POST /translate 엔드포인트: 클라이언트가 파일의 버킷 이름과 파일 이름을 전달합니다.
 app.post('/translate', async (req, res) => {
   try {
@@ -70,18 +85,8 @@ app.post('/translate', async (req, res) => {
       return res.status(500).json(result);
     }
 
-    // 번역 완료 후 다른 API에 알림 전송 (POST 요청)
-    try {
-      const notifyResponse = await axios.post(NOTIFY_API_URL, {
-        fileName,
-        targetBucket: TARGET_BUCKET,
-        status: 'completed'
-      });
-      console.log('알림 전송 완료:', notifyResponse.data);
-    } catch (notifyError) {
-      console.error('알림 전송 오류:', notifyError.message);
-      // 알림 전송 실패 시 로그만 남기고 계속 진행할 수도 있습니다.
-    }
+    //다른 API로 요청 보내기
+    // requestOthAPI(fileName);
 
     return res.status(200).json({ message: '번역 및 알림 전송 완료', fileName });
   } catch (error) {
