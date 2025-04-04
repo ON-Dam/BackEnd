@@ -4,5 +4,4 @@ app.yaml
 package-lock.json
 package.json
 .idea
-/ex
 .env
