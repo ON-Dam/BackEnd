@@ -10,7 +10,7 @@ RUN npm install
 
 # 소스코드 전체 복사
 COPY . .
-
+COPY .env ./
 # Cloud Run은 기본적으로 포트 8080을 사용
 ENV PORT=8080
 EXPOSE 8080
